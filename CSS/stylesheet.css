@@ -1,0 +1,104 @@
+body{
+	background-color:#2790fb;
+	font-family:Sans-Serif;
+	word-wrap:break-word;
+}
+
+div,h1,h2,p,form{
+	text-align:center;
+}
+
+h1{
+	font-family:Ubuntu;
+	color:white;
+	font-size:7vh;
+}
+
+h2{
+	color:white;
+	font-size:4vh;
+}
+
+a{
+	display:inline-block;
+	font-size:2.5vh;
+	max-width:74vw;
+	padding:2vh 3vw 2vh 3vw;
+	margin-bottom:1vh;
+	color:white;
+	background-color:#37b0fb;
+	border-radius:3vh;
+}
+
+a:hover,a:focus{
+	background-color:white;
+	color:#2790fb;
+}
+
+span.shareit{
+	font-family:Arial;
+	font-weight:normal;
+	font-size:9vh;
+}
+
+span.share{
+	font-weight:bold;
+}
+
+.Button{
+	border-radius:4vh;
+	font-size:4vh;
+	background-color:#2790fb;
+	padding:0.5vh 2vw 0.5vh 2vw;
+	border-style:solid;
+	color:white;
+	margin-top:2vh;margin-bottom:2vh;
+	border-color:white;
+	border-width:0.7vh;
+}
+
+.Button:hover,.Button:focus{
+	background-color:white;
+	color:#2790fb;
+}
+
+.Button[type='file']{
+	padding:0 0 0 0;
+	max-width:70vw;
+	font-size:3vh;
+}
+
+#ToogleCheckboxesButton{
+	margin-left:2vh;
+}
+
+#DeleteButton,#DownloadButton,#SelectAllButton{
+	display:none;
+}
+
+#Progress{
+	display:none;
+}
+
+.progress_bar{
+	display:none;
+	text-align:left;
+	width:60vw;
+	height:4vh;
+	border:white solid 0.5vh;
+}
+
+.progress_bar_fill{
+	display:inline-block;
+	vertical-align:middle;
+	background-color:white;
+	height:4vh;
+	width:0vw;
+}
+
+.checkbox{
+	display:none;
+	height:5vh;
+	width:5vh;
+	vertical-align:middle;
+}
