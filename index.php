@@ -12,7 +12,7 @@
 	<body>
 		<h1> SHIT <span class="shareit"><span class="share">SHARE</span>it</span> </h1>
 		<form id="myform" action="" method="POST"  enctype="multipart/form-data">
-			<input class="Button" type="file" name="file[]" multiple required/>
+			<input id="file_input" class="Button" type="file" name="file[]" multiple required/>
 			<br/>
 			<input class="Button" id="SubmitButton" name="submit" type="submit" value="Share"/>
 			<button type="button" class="Button" id="ToogleCheckboxesButton">Toogle Checkboxes</button>
@@ -21,8 +21,11 @@
 			<button type="button" class="Button" id="SelectAllButton">Select All</button>
 		</form>
 		<div>
-				<div class="progress_bar">
-					<div class="progress_bar_fill"></div>
+				<div id="file_progress_bar" class="progress_bar">
+					<div id="file_progress_bar_fill" class="progress_bar_fill"></div>
+				</div>
+				<div id="main_progress_bar" class="progress_bar">
+					<div id="main_progress_bar_fill" class="progress_bar_fill"></div>
 				</div>
 		</div>
 		<h2 id="Progress">
@@ -31,13 +34,13 @@
 			<span id="time_min">0</span>m 
 			<span id="time_sec">0</span>s
 		</h2>
-		<p>
+		<p id="FileLinksContainer">
 			<?php
 				$files= array_diff(scandir("files_for_share"),array(".",".."));
 				foreach( $files as $file){
 					echo "<a class='FileLink' download='$file' href='files_for_share/$file'>$file</a><input class='checkbox' type='checkbox' name='files' value='files_for_share/$file'/><br/>";
 				}
-			 ?>
+			?>
 		</p>
 	</body>
 </html>

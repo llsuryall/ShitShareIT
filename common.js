@@ -22,4 +22,3 @@ function toogleVisibility(element,display_style,multiple=false){
 		element.style.display = (element.style.display=='none'?display_style:'none');
 	}
 }
-

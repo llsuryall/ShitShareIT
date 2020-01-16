@@ -71,7 +71,7 @@ DeleteButton.onclick = function(){
 		xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xhttp.send(str);
 		xhttp.onload = function(){
-			window.location=window.location;
+			reloadFileLinks();toogleAll();
 		}
 	}
 }

@@ -82,6 +82,7 @@ span.share{
 
 .progress_bar{
 	display:none;
+	margin-top:2vh;
 	text-align:left;
 	width:60vw;
 	height:4vh;
