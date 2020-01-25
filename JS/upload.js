@@ -5,10 +5,12 @@ const FileLinksContainer = _("#FileLinksContainer");
 const time_min = _("#time_min");
 const time_sec = _("#time_sec");
 const Progress= _("#Progress");
+const RefreshButton = _("#RefreshButton");
 const main_progress_bar = _("#main_progress_bar");
 const main_progress_bar_fill = _("#main_progress_bar_fill");
 const file_progress_bar = _("#file_progress_bar");
 const file_progress_bar_fill = _("#file_progress_bar_fill");
+const CancelButton = _("#CancelButton");
 const myOtherConst = 1024*1024;
 const myConstant = 1000/myOtherConst;
 let DateObject;
@@ -21,6 +23,8 @@ function toogleWhileSharing(){
 	toogleVisibility(file_progress_bar,'inline-block');
 	toogleVisibility(myform,'block');
 	toogleVisibility(Progress,'block');
+	toogleVisibility(CancelButton,'inline-block');
+	toogleVisibility(RefreshButton,'inline-block');
 }
 
 function updateSpeed(){
@@ -83,12 +87,7 @@ function uploadEachFile(no,done,total){
 			clearTimeout(timeout);
 			updateSpeed();
 			flag = false;
-			let xhr = new XMLHttpRequest();
-			xhr.open("POST","../PHP_Scripts/filelink.php");
-			xhr.send();
-			xhr.onload = function(){
-				FileLinksContainer.innerHTML = xhr.responseText;
-			}
+			reloadFileLinks();
 			done+= file_input.files[no].size;no++;
 			uploadEachFile(no,done,total);
 		};
@@ -99,6 +98,8 @@ function uploadEachFile(no,done,total){
 	}
 }
 
+CancelButton.style.display = 'none';
+RefreshButton.style.display = 'inline-block';
 file_progress_bar.style.display = 'none';
 main_progress_bar.style.display = 'none';
 Progress.style.display = 'none';
@@ -112,4 +113,13 @@ myform.onsubmit = function (el) {
 		no++;
 	}
 	uploadEachFile(0,0,total);
+};
+
+CancelButton.onclick = function(){
+	toogleWhileSharing();
+	window.location = window.location;
+};
+
+RefreshButton.onclick = function(){
+	reloadFileLinks();
 };

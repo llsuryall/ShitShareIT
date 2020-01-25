@@ -1,4 +1,4 @@
-<!DOCUMENT html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title> SHIT SHAREit </title>
@@ -27,6 +27,9 @@
 				<div id="main_progress_bar" class="progress_bar">
 					<div id="main_progress_bar_fill" class="progress_bar_fill"></div>
 				</div>
+				<button type="button" class="Button" id="RefreshButton">Refresh</button>
+				<br/>
+				<button type="button" class="Button" id="CancelButton">Cancel</button>
 		</div>
 		<h2 id="Progress">
 			<span id="percentage">0</span>%
