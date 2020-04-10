@@ -4,11 +4,13 @@ const ToogleCheckboxesButton = _("#ToogleCheckboxesButton");
 const SubmitButton = _("#SubmitButton");
 const Checkboxes = _(".checkbox");
 const FileLinks = _(".FileLink");
+const Path = _("#Path");
+const PathLB = _("#PathLB");
 const SelectAllButton = _("#SelectAllButton");
+let checkbox_flag=0;
 let count=0;
 
 function DownloadFiles(){
-	console.log(count);
 	if(count>Checkboxes.length-1){
 		return 0;
 	}
@@ -30,9 +32,13 @@ if(navigator.userAgent.indexOf("Firefox") != -1){
 		Checkboxes[i].style.margin ='0vh 0vh 0vh 3vw';
 	}
 }
+RefreshButton.style.display = 'inline-block';
 DeleteButton.style.display = 'none';
 DownloadButton.style.display = 'none';
 SelectAllButton.style.display = 'none';
+Path.style.display = 'inline-block';
+PathLB.style.display = 'initial';
+ToogleCheckboxesButton.style.display = 'inline-block';
 for(let i =0;i<Checkboxes.length;i++){
 	Checkboxes[i].style.display ='none';
 }
@@ -47,11 +53,15 @@ function toogleAll(){
 			Checkboxes[i].checked=false;
 		}
 	}
-	toogleVisibility(DeleteButton,'inline');
-	toogleVisibility(DownloadButton,'inline');
-	toogleVisibility(SubmitButton,'inline');
-	toogleVisibility(SelectAllButton,'inline');
+	checkbox_flag = !checkbox_flag;
+	toogleVisibility(RefreshButton,'inline-block');
+	toogleVisibility(DeleteButton,'inline-block');
+	toogleVisibility(DownloadButton,'inline-block');
+	toogleVisibility(myform,'block');
+	toogleVisibility(SelectAllButton,'inline-block');
 	toogleVisibility(Checkboxes,'inline-block',true);
+	toogleVisibility(Path,'inline-block');
+	toogleVisibility(PathLB,'initial');
 }
 
 DownloadButton.onclick = function(){ count=0;DownloadFiles();};
@@ -62,7 +72,7 @@ DeleteButton.onclick = function(){
 	for(let i =0;i<Checkboxes.length;i++){
 		if(Checkboxes[i].checked){
 			con++;
-			str = str +'"../'+ Checkboxes[i].value+ '" ';
+			str = str +'"' + Checkboxes[i].value+ '" ';
 		}
 	}
 	if(con>=1){
@@ -75,6 +85,11 @@ DeleteButton.onclick = function(){
 		}
 	}
 }
+
+Path.onchange = function (){
+	setPath();
+	reloadFileLinks();
+};
 
 SelectAllButton.onclick = function(){
 	for(let i=0;i<Checkboxes.length;i++){

@@ -18,10 +18,16 @@ let timeout = setTimeout(function(){},1000);
 let loadedTime = 0;
 let flag = false;
 
+function setPath(){
+	path = Path.value;
+}
+
 function toogleWhileSharing(){
 	toogleVisibility(main_progress_bar,'inline-block');
 	toogleVisibility(file_progress_bar,'inline-block');
 	toogleVisibility(myform,'block');
+	toogleVisibility(Path,'inline-block');
+	toogleVisibility(ToogleCheckboxesButton,'inline-block');
 	toogleVisibility(Progress,'block');
 	toogleVisibility(CancelButton,'inline-block');
 	toogleVisibility(RefreshButton,'inline-block');
@@ -36,8 +42,9 @@ function updateSpeed(){
 
 function reloadFileLinks(){
 	let xhr = new XMLHttpRequest();
-	xhr.open("POST","../PHP_Scripts/filelink.php");
-	xhr.send();
+	xhr.open("POST","PHP_Scripts/filelink.php");
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send("dir="+path);
 	xhr.onload = function(){
 		FileLinksContainer.innerHTML = xhr.responseText;
 		for(let i =0;i<Checkboxes.length;i++){
@@ -47,8 +54,8 @@ function reloadFileLinks(){
 			for(let i =0;i<Checkboxes.length;i++){
 				Checkboxes[i].style.width ='2vh';
 				Checkboxes[i].style.height ='2vh';
-				Checkboxes[i].style.transform ='scale(2.5)';		
-				Checkboxes[i].style.margin ='0vh 0vh 0vh 3vw';
+				Checkboxes[i].style.transform ='scale(2.5)';
+				Checkboxes[i].style.margin ='0 1vw 0 3vw';
 			}
 		}
 	}
@@ -121,5 +128,6 @@ CancelButton.onclick = function(){
 };
 
 RefreshButton.onclick = function(){
+	setPath();
 	reloadFileLinks();
 };

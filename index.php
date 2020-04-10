@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<title> SHIT SHAREit </title>
+		<meta charset="utf-8" name="viewport" content="user-scalable=no"/>
+		<meta name="theme-color" content="#2790fb"/>
 		<link rel="stylesheet" href="CSS/stylesheet.css" type="text/css"/>
 		<link rel="icon" type="icon/png" href="Icons/shareit.png"/>
 		<script src="common.js"></script>
@@ -15,10 +17,6 @@
 			<input id="file_input" class="Button" type="file" name="file[]" multiple required/>
 			<br/>
 			<input class="Button" id="SubmitButton" name="submit" type="submit" value="Share"/>
-			<button type="button" class="Button" id="ToogleCheckboxesButton">Toogle Checkboxes</button>
-			<button type="button" class="Button" id="DownloadButton">Download</button>
-			<button type="button" class="Button" id="DeleteButton">Delete</button>
-			<button type="button" class="Button" id="SelectAllButton">Select All</button>
 		</form>
 		<div>
 				<div id="file_progress_bar" class="progress_bar">
@@ -27,9 +25,13 @@
 				<div id="main_progress_bar" class="progress_bar">
 					<div id="main_progress_bar_fill" class="progress_bar_fill"></div>
 				</div>
-				<button type="button" class="Button" id="RefreshButton">Refresh</button>
-				<br/>
-				<button type="button" class="Button" id="CancelButton">Cancel</button>
+				<input id="Path" class="TextInput" type="text"/><br id="PathLB"/>
+				<input type="button" class="Button" id="RefreshButton" value="Refresh">
+				<input type="button" class="Button" id="ToogleCheckboxesButton" value="Toogle Checkboxes"/>
+				<input type="button" class="Button" id="DownloadButton" value="Download"/>
+				<input type="button" class="Button" id="DeleteButton" value="Delete"/>
+				<input type="button" class="Button" id="SelectAllButton" value="Select All"/>
+				<input type="button" class="Button" id="CancelButton" value="Cancel">
 		</div>
 		<h2 id="Progress">
 			<span id="percentage">0</span>%
@@ -38,12 +40,10 @@
 			<span id="time_sec">0</span>s
 		</h2>
 		<p id="FileLinksContainer">
-			<?php
-				$files= array_diff(scandir("files_for_share"),array(".",".."));
-				foreach( $files as $file){
-					echo "<a class='FileLink' download='$file' href='files_for_share/$file'>$file</a><input class='checkbox' type='checkbox' name='files' value='files_for_share/$file'/><br/>";
-				}
-			?>
 		</p>
+		<script>
+			let path = "/var/www/share/files_for_share";
+			window.onload = function(){ reloadFileLinks();}
+		</script>
 	</body>
 </html>

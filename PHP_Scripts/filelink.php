@@ -1,6 +1,20 @@
 <?php
-	$files= array_diff(scandir("../files_for_share"),array(".",".."));
+	if(file_exists($_POST['dir'])){
+		$path = $_POST['dir'];
+	}
+	else{
+		$path = "/var/www/share/files_for_share";
+		echo "<p align='center' style='color:white;'>That directory does not exist! Opening default directory...</p>";
+	}
+	$files= array_diff(scandir("$path"),array("."));
+	shell_exec('rm -rf ../temp/* ../temp/.*');
 	foreach( $files as $file){
-		echo "<a class='FileLink' download='$file' href='files_for_share/$file'>$file</a><input class='checkbox' type='checkbox' name='files' value='files_for_share/$file'/><br/>";
+		if(is_dir("$path/$file")){
+			echo "<div class='linkcontainer'><input class='checkbox' type='checkbox' name='files' value='$path/$file'/><span class='dir' onclick='path=\"$path/$file\";reloadFileLinks();if(checkbox_flag){toogleAll();}'>$file</span></div>";
+		}
+		else{
+			shell_exec("ln -s '$path/$file' '../temp/$file'");
+			echo "<div class='linkcontainer'><input class='checkbox' type='checkbox' name='files' value='$path/$file'/><a class='FileLink' download='$file' href='./temp/$file'>$file</a></div>";
+		}
 	}
 ?>
